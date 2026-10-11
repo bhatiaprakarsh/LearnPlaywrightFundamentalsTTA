@@ -99,11 +99,29 @@ await page.getByRole('textbox', { name: 'Email' }).fill(email);
 await page.getByRole('button', { name: 'Sign in' }).click();
 ```
 
+The Wingify login example uses the button's `js-login-btn` ID from the page markup:
+
+```typescript
+await page.locator('#js-login-btn').click();
+```
+
+If the accessible role/name locator does not match the live page, inspect its accessible name and use a stable ID or test ID as a fallback.
+
 Run the locator examples with:
 
 ```powershell
 npx playwright test tests/03_Locators
 ```
+
+## Saving an authenticated session
+
+The session-storage example is a Playwright test, so Code Runner and the Playwright test runner can discover and execute it:
+
+```powershell
+npx playwright test tests/04_Session_Storage/233_SessionStorage.spec.ts --headed
+```
+
+Set `VWO_USER` and `VWO_PASS` in the root `.env` file before running it. After a successful login, the test writes browser storage state to `user-session.json`. This file contains authentication data, is ignored by Git, and should be kept private.
 
 ## CLI
 

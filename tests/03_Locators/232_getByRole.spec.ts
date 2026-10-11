@@ -11,12 +11,7 @@ test("Verify the error msg", async ( {page} ) => {
     await page.getByRole('textbox', {name: "Email"}).fill(email);
     await page.getByRole('textbox', {name: "password"}).fill(password);
 
-    await page.getByRole('textbox', {name: "Remember me"}).click();
+    await page.locator('#js-login-btn').click();
 
     await page.pause();
-})
-
-
-
-
-
+});
