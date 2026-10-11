@@ -1,0 +1,6 @@
+{
+  "code-runner.executorMap": {
+    "typescript": "powershell -ExecutionPolicy Bypass -File .\\.vscode\\run-playwright.ps1 -TestFile $fullFileName"
+  },
+  "code-runner.runInTerminal": true
+}

@@ -46,7 +46,7 @@ npx playwright test
 Run one test file:
 
 ```powershell
-npx playwright test tests/example.spec.ts
+npx playwright test tests/01_Basics/216_example.spec.ts
 ```
 
 Run tests in headed mode:
@@ -89,6 +89,21 @@ npx playwright codegen https://playwright.dev
 ```
 
 The generated code should be reviewed and cleaned up before committing. Prefer accessible locators such as `getByRole`, `getByLabel`, and `getByText` where they are stable.
+
+## Locators
+
+The examples in `tests/03_Locators` demonstrate locating page elements with roles, labels, text, and CSS selectors. Prefer user-facing locators such as `getByRole` when they accurately identify the control:
+
+```typescript
+await page.getByRole('textbox', { name: 'Email' }).fill(email);
+await page.getByRole('button', { name: 'Sign in' }).click();
+```
+
+Run the locator examples with:
+
+```powershell
+npx playwright test tests/03_Locators
+```
 
 ## CLI
 
@@ -151,20 +166,22 @@ Web application
 
 ## Login example configuration
 
-The login example reads credentials from environment variables rather than source code. Copy `.env.example` to `.env` and set values in your local environment. Never commit `.env` or real credentials.
+Login examples that require an account read credentials from `TEST_EMAIL` and `TEST_PASSWORD`. Set them in the current PowerShell session before running the relevant test. Use credentials for the site being tested; never commit real credentials.
 
-In PowerShell, a temporary setup for the current terminal is:
+For example:
 
 ```powershell
-$env:METTL_EMAIL = "your-email@example.com"
-$env:METTL_PASSWORD = "your-password"
-npx playwright test tests/loginXYZ.spec.ts --headed
+$env:TEST_EMAIL = "your-email@example.com"
+$env:TEST_PASSWORD = "your-password"
+npx playwright test tests/03_Locators/232_getByRole.spec.ts --headed
 ```
 
 ## Project structure
 
 ```text
-tests/                 Playwright test files
+tests/01_Basics/       Playwright basics and login examples
+tests/02_TestAnnotations/ Test annotation examples
+tests/03_Locators/     Locator examples, including getByRole
 playwright.config.ts   Test runner and browser configuration
 package.json           npm scripts and dependencies
 ```
