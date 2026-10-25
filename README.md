@@ -225,7 +225,7 @@ Web application
 
 Login examples that require an account read credentials from `TEST_EMAIL` and `TEST_PASSWORD`. Set them in the current PowerShell session before running the relevant test. Use credentials for the site being tested; never commit real credentials.
 
-For example:
+For example:-
 
 ```powershell
 $env:TEST_EMAIL = "your-email@example.com"
