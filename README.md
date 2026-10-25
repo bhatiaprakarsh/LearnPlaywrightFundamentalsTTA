@@ -73,6 +73,8 @@ Debug a test:
 npx playwright test --debug
 ```
 
+The VS Code Code Runner button uses `.vscode/run-playwright.ps1`: Playwright files ending in `.spec.ts` or `.test.ts` run with the Playwright Test runner, while standalone TypeScript files run with `tsx`.
+
 Update Playwright and its browsers:
 
 ```powershell

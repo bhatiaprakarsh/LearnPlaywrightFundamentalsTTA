@@ -1,0 +1,16 @@
+{
+  "Playwright test template": {
+    "scope": "typescript",
+    "prefix": "template",
+    "body": [
+      "import {test, expect, Locator} from '@playwright/test';",
+      "",
+      "test('${1:Test Case}', async ({page}) => {",
+      "    await page.goto(\"${2}\");",
+      "",
+      "    $0",
+      "});"
+    ],
+    "description": "Insert the Playwright test template"
+  }
+}

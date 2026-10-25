@@ -1,0 +1,1 @@
+await page.locator('button[type="button"]').click();
