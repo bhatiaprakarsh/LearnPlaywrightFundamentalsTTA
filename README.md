@@ -115,6 +115,43 @@ Run the locator examples with:
 npx playwright test tests/03_Locators
 ```
 
+## Tables and dropdowns
+
+The examples in `tests/06_Multiple_Element` and `tests/07_WebTables` demonstrate working with repeated elements and table-like layouts. A common pattern is to locate the row containers, filter to the row containing a name, and then locate a control within that row:
+
+```typescript
+const employeeRow = page
+  .locator('.oxd-table-card')
+  .filter({ hasText: 'Rohan Mehta' });
+
+await employeeRow.locator('input[type="checkbox"]').click();
+```
+
+The examples in `tests/08_Web_Select_Frame_IFrame` cover native and custom dropdowns. Use `selectOption` for a native HTML `<select>`:
+
+```typescript
+await page.locator('#dropdown').selectOption('Option 2');
+```
+
+For custom dropdown widgets, open the control and select an option using a locator. The advanced example also demonstrates test IDs and waiting for an asynchronously loaded option:
+
+```typescript
+await page.getByTestId('rs-single').click();
+await page.getByText('Cypress', { exact: true }).click();
+
+await page.getByTestId('rs-async-input').fill('pun');
+await expect(page.getByTestId('rs-async-menu')).toContainText('Pune');
+await page.getByRole('option', { name: 'Pune', exact: true }).click();
+```
+
+Run these examples with:
+
+```powershell
+npx playwright test tests/06_Multiple_Element
+npx playwright test tests/07_WebTables
+npx playwright test tests/08_Web_Select_Frame_IFrame
+```
+
 ## Saving an authenticated session
 
 The session-storage example is a Playwright test, so Code Runner and the Playwright test runner can discover and execute it:
@@ -199,9 +236,13 @@ npx playwright test tests/03_Locators/232_getByRole.spec.ts --headed
 ## Project structure
 
 ```text
-tests/01_Basics/       Playwright basics and login examples
-tests/02_TestAnnotations/ Test annotation examples
-tests/03_Locators/     Locator examples, including getByRole
-playwright.config.ts   Test runner and browser configuration
-package.json           npm scripts and dependencies
+tests/01_Basics/               Playwright basics and login examples
+tests/02_TestAnnotations/      Test annotation examples
+tests/03_Locators/             Locator examples, including getByRole
+tests/04_Session_Storage/      Browser storage and authenticated sessions
+tests/06_Multiple_Element/     Multiple matching elements and filtering
+tests/07_WebTables/            Web-table and pagination examples
+tests/08_Web_Select_Frame_IFrame/ Native and custom dropdown examples
+playwright.config.ts           Test runner and browser configuration
+package.json                   npm dependencies
 ```
